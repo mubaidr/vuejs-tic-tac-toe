@@ -1,0 +1,48 @@
+  body {
+    background-color: #303f9e;
+    color: #c4c9e8;
+    margin: 5px;
+    font-family: 'Dancing Script', cursive;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently supported by Chrome and Opera */
+  }
+
+  .clearfix {
+    clear: both;
+    display: block;
+  }
+
+  .brand {
+    text-align: center;
+    font-size: 1.25em;
+    margin: 5% auto;
+  }
+
+  h1.brand {
+    font-size: 3em;
+    color: #fff;
+    margin-bottom: 0;
+  }
+
+  h2.brand {
+    margin-bottom: 25px;
+  }
+
+  .brand a {
+    color: #c4c9e8;
+  }
+
+  .brand a:hover {
+    color: #fff;
+  }
+  /*Controls layout*/

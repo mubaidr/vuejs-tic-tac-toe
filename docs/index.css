@@ -1,31 +1,15 @@
   body {
     background-color: #303f9e;
-    color: #c4c9e8;
+    color: #212121;
     margin: 5px;
-    font-family: 'Dancing Script', cursive;
-    -webkit-touch-callout: none;
-    /* iOS Safari */
-    -webkit-user-select: none;
-    /* Safari */
-    -khtml-user-select: none;
-    /* Konqueror HTML */
-    -moz-user-select: none;
-    /* Firefox */
-    -ms-user-select: none;
-    /* Internet Explorer/Edge */
-    user-select: none;
-    /* Non-prefixed version, currently supported by Chrome and Opera */
-  }
-
-  .clearfix {
-    clear: both;
-    display: block;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
 
   .brand {
     text-align: center;
     font-size: 1.25em;
     margin: 5% auto;
+    color: #c4c9e8;
   }
 
   h1.brand {
@@ -45,4 +29,92 @@
   .brand a:hover {
     color: #fff;
   }
-  /*Controls layout*/
+  /*Button*/
+
+  button {
+    background-color: #fe4081;
+    border: none;
+    color: #fff;
+    padding: 10px 25px;
+    transition: all 0.25s ease-out;
+    outline: none;
+    font-size: 1.25em;
+    cursor: pointer;
+    border-radius: 3px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  button:active {
+    transform: scale(0.95)
+  }
+  /*Game container*/
+
+  .game-container {
+    width: 50%;
+    min-width: 300px;
+    padding: 10px;
+    margin: 10px auto;
+    text-align: center;
+  }
+
+  .game-bar,
+  .info-bar {
+    display: block;
+    padding: 5px;
+    background-color: #c4c9e8;
+    min-height: 44px;
+  }
+
+  .game-table {
+    width: 100%;
+    border: none;
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
+
+  .game-table td {
+    padding: 25px 0;
+    margin: 0;
+    width: 33%;
+    font-size: 4em;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px dotted black;
+  }
+  /*screens layout*/
+
+  .main-menu {
+    padding: 5px;
+    background-color: #3f51b5;
+    box-shadow: 0 0 3px #222;
+    text-align: right;
+    position: relative;
+    z-index: 9999;
+    min-height: 44px;
+  }
+
+  .screen {
+    display: block;
+    padding: 75px 25px;
+    background-color: #fefefe;
+    box-shadow: 0 0 3px #222;
+  }
+
+  .screen.condensed {
+    padding: 0;
+  }
+  /*utilties*/
+
+  .clearfix {
+    clear: both;
+    display: block;
+  }
+
+  .columns {
+    display: block;
+  }
+
+  .columns div {
+    width: 50%;
+    float: left;
+  }

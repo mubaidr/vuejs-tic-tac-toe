@@ -80,6 +80,7 @@
     font-weight: bold;
     cursor: pointer;
     border: 1px dotted black;
+    height: 79px;
   }
   /*screens layout*/
 
@@ -91,6 +92,11 @@
     position: relative;
     z-index: 9999;
     min-height: 44px;
+  }
+
+  .main-menu button {
+    background-color: transparent;
+    color: #fe4081;
   }
 
   .screen {
@@ -117,4 +123,28 @@
   .columns div {
     width: 50%;
     float: left;
+  }
+  /*animations*/
+  /* Enter and leave animations can use different */
+  /* durations and timing functions.              */
+
+  .slide-fade-enter-active,
+  .slide-fade-leave-active {
+    transition: all .3s ease-out;
+  }
+
+  .slide-fade-enter,
+  .slide-fade-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+
+  .slide-fade-screen-enter-active,
+  .slide-fade-screen-leave-active {
+    transition: all .3s ease-out;
+  }
+
+  .slide-fade-screen-enter,
+  .slide-fade-screen-leave-to {
+    transform: translateY(-50px);
   }

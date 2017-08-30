@@ -15,78 +15,67 @@
       <h1 class="brand">Vue.js Tic Tac Toe</h1>
       <div class="game-container">
         <div class="main-menu">
-          <button>Menu</button>
+          <transition name="slide-fade">
+            <button @click="resetScreen" v-show="screen !== 0">Return to Main Menu</button>
+          </transition>
         </div>
-        <div class="screen">
-          <h2>Welcome!</h2>
-          <p>
-            <button>Start a new game</button>
-          </p>
-        </div>
-        <div class="screen">
-          <h2>How do you want to play?</h2>
-          <div class="columns">
-            <div>
-              <button>One Player</button>
-            </div>
-            <div>
-              <button>Two Player</button>
-            </div>
+        <transition-group name="slide-fade-screen" tag="div">
+          <div class="screen" v-show="screen === 0" :key="screen">
+            <h2>Welcome!</h2>
+            <button @click="skipScreen">Start a new game</button>
           </div>
-          <div class="clearfix"></div>
-        </div>
-        <div class="screen">
-          <h2>Player 1: Would you like to be X or O?</h2>
-          <div class="columns">
-            <div>
-              <button>X</button>
-            </div>
-            <div>
-              <button>O</button>
-            </div>
-          </div>
-          <div class="clearfix"></div>
-        </div>
-        <div class="screen condensed">
-          <div class="game-bar">
+          <div class="screen" v-show="screen === 1" :key="screen">
+            <h2>How do you want to play?</h2>
             <div class="columns">
               <div>
-                <h4>Player One: {{}}</h4>
+                <button @click="setGameType(true)">VS Computer</button>
               </div>
               <div>
-                <h4 v-if="">Player Two: {{}}</h4>
-                <h4 v-else>Player Two: {{}}</h4>
+                <button @click="setGameType(false)">Two Players</button>
               </div>
             </div>
             <div class="clearfix"></div>
           </div>
-          <table class="game-table">
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="info-bar">
-            <h4>Turn: {{}}</h4>
+          <div class="screen" v-show="screen === 2" :key="screen">
+            <h2>Player 1: Would you like to be X or O?</h2>
+            <div class="columns">
+              <div>
+                <button @click="setPlayerSymbol('X')">X</button>
+              </div>
+              <div>
+                <button @click="setPlayerSymbol('O')">O</button>
+              </div>
+            </div>
+            <div class="clearfix"></div>
           </div>
-        </div>
+          <div class="screen condensed" v-show="screen === 3" :key="screen">
+            <div class="game-bar">
+              <div class="columns">
+                <div>
+                  <h4>Player One: {{playerData.one.score}}</h4>
+                </div>
+                <div>
+                  <h4>Player Two: {{playerData.two.score}}</h4>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <table class="game-table">
+              <tbody>
+                <tr v-for="n in 3">
+                  <td v-for="n in 3"></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="info-bar">
+              <h4>Turn: {{turn}}</h4>
+            </div>
+          </div>
+        </transition-group>
       </div>
     </div>
     <h2 class="brand">Designed and Coded by <a href="https://github.com/mubaidr">mubaidr</a></h2>
-    </div>
+
     <script src="../node_modules/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue@2.4.2"></script>
     <script src="./index.js"></script>

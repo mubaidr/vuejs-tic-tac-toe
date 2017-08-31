@@ -101,6 +101,8 @@ var myApp = new Vue({
       } else {
         this.showScreen(true)
       }
+
+      this.nextTurn()
     },
     nextTurn () {
       if (this.turn === 'one') {
@@ -108,7 +110,7 @@ var myApp = new Vue({
         // simulate computer trun
         if (this.playerData.two.isComputer) {
           this.playComputerTurn()
-          this.nextTurn()
+          this.validateStatus()
         }
       } else {
         this.turn = 'one'
@@ -165,7 +167,6 @@ var myApp = new Vue({
       if (this.turn === 'two' && this.playerData[this.turn].isComputer) return
       this.gameData[row][cell] = this.playerData[this.turn].symbol
       this.validateStatus()
-      this.nextTurn()
     },
     cellHighlight (e) {
       let target = e.target

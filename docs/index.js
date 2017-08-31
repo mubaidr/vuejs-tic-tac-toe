@@ -145,7 +145,8 @@ var myApp = new Vue({
     },
     setPlayerSymbol (symbol) {
       this.playerData.one.symbol = symbol
-      this.playerData.two.symbol = symbol === 'X' ? 'O' : symbol
+      this.playerData.two.symbol = symbol === 'X' ? 'O' : 'X'
+
       this.skipScreen()
       this.startGame()
     },

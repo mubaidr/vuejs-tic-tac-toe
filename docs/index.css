@@ -8,18 +8,12 @@
   .brand {
     text-align: center;
     font-size: 1.25em;
-    /* margin: 5% auto; */
     color: #c4c9e8;
   }
 
   h1.brand {
     font-size: 3em;
     color: #fff;
-    /* margin-bottom: 0; */
-  }
-
-  h2.brand {
-    /* margin-bottom: 25px; */
   }
 
   .brand a {

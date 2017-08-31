@@ -15,16 +15,30 @@ var myApp = new Vue({
         isComputer: true
       }
     },
+    winner: [],
     gameData: [
       ['', '', ''],
       ['', '', ''],
       ['', '', '']
     ],
-    winner: []
+    winCombos: [
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9],
+      [1, 4, 7],
+      [2, 5, 8],
+      [3, 6, 9],
+      [1, 5, 9],
+      [7, 5, 3]
+    ]
   },
   created () {},
   mounted () {},
-  watch: {},
+  watch: {
+    'winner' () {
+
+    }
+  },
   computed: {
     playerOneScore () {
       return this.winner.filter((item) => {
@@ -42,18 +56,51 @@ var myApp = new Vue({
   },
   methods: {
     validateStatus () {
+      let players = ['one', 'two']
       let emptyPos = []
+      let isWin = false
+      let row
+      let cell
+      let i
 
-      this.gameData.forEach((row, i) => {
-        row.forEach((cell, j) => {
-          if (cell === '') {
-            emptyPos.push({
-              row: i,
-              cell: j
-            })
+      players.forEach((player) => {
+        for (i = 0; i < this.winCombos.length; i++) {
+          let winCombo = this.winCombos[i]
+
+          let sequence = winCombo.filter((val) => {
+            val--
+            row = Math.floor(val / 3)
+            cell = Math.floor(val % 3)
+
+            return this.gameData[row][cell] === this.playerData[player].symbol
+          }, this)
+
+          if (sequence.length === 3) {
+            isWin = true
+            this.winner.push(player)
+            break
           }
+        }
+      }, this)
+
+      if (!isWin) {
+        this.gameData.forEach((row, i) => {
+          row.forEach((cell, j) => {
+            if (cell === '') {
+              emptyPos.push({
+                row: i,
+                cell: j
+              })
+            }
+          })
         })
-      })
+
+        if (emptyPos.length === 0) {
+          this.showScreen(false)
+        }
+      } else {
+        this.showScreen(true)
+      }
     },
     nextTurn () {
       if (this.turn === 'one') {
@@ -82,6 +129,7 @@ var myApp = new Vue({
         })
       })
 
+      if (emptyPos.length === 0) return
       emptyPosValue = emptyPos[Math.floor(Math.random() * (emptyPos.length - 1))]
       this.gameData[emptyPosValue.row][emptyPosValue.cell] = this.playerData.two.symbol
     },
@@ -128,6 +176,9 @@ var myApp = new Vue({
       } else {
         target.className = ''
       }
+    },
+    showScreen (isWin) {
+      console.log(isWin)
     }
   }
 })

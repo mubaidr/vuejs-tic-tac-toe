@@ -49,6 +49,29 @@
     padding: 10px;
     margin: 10px auto;
     text-align: center;
+    position: relative;
+  }
+
+  .overlay-message {
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 4;
+    font-size: 3em;
+    font-style: italic;
+    text-align: center;
+  }
+
+  .overlay-message p {
+    margin-top: 30%;
+  }
+
+  .overlay-message a {
+    color: #eee;
   }
 
   .game-bar,
@@ -111,7 +134,7 @@
     box-shadow: 0 0 3px #222;
     text-align: right;
     position: relative;
-    z-index: 9999;
+    z-index: 1;
     min-height: 44px;
   }
 
@@ -129,6 +152,11 @@
 
   .screen.condensed {
     padding: 0;
+  }
+
+  .screen.result {
+    font-size: 2em;
+    font-style: italic;
   }
   /*utilties*/
 

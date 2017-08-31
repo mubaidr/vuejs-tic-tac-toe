@@ -19,60 +19,69 @@
             <button @click="resetScreen" v-show="screen !== 0">Return to Main Menu</button>
           </transition>
         </div>
-        <transition-group name="slide-fade-screen" tag="div">
-          <div class="screen" v-show="screen === 0" :key="screen">
-            <h2>Welcome!</h2>
-            <button @click="skipScreen">Start a new game</button>
+        <!-- <transition-group name="slide-fade-screen" tag="div"> -->
+        <div class="screen" v-show="screen === 0" :key="0">
+          <h2>Welcome!</h2>
+          <button @click="skipScreen">Start a new game</button>
+        </div>
+        <div class="screen" v-show="screen === 1" :key="1">
+          <h2>How do you want to play?</h2>
+          <div class="columns">
+            <div>
+              <button @click="setGameType(true)">VS Computer</button>
+            </div>
+            <div>
+              <button @click="setGameType(false)">Two Players</button>
+            </div>
           </div>
-          <div class="screen" v-show="screen === 1" :key="screen">
-            <h2>How do you want to play?</h2>
+          <div class="clearfix"></div>
+        </div>
+        <div class="screen" v-show="screen === 2" :key="2">
+          <h2>Player 1: Would you like to be X or O?</h2>
+          <div class="columns">
+            <div>
+              <button @click="setPlayerSymbol('X')">X</button>
+            </div>
+            <div>
+              <button @click="setPlayerSymbol('O')">O</button>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="screen condensed" v-show="screen === 3" :key="3">
+          <div class="game-bar">
             <div class="columns">
               <div>
-                <button @click="setGameType(true)">VS Computer</button>
+                <h4>Player One: {{playerOneScore}}</h4>
               </div>
               <div>
-                <button @click="setGameType(false)">Two Players</button>
+                <h4>{{playerTwoName}}: {{playerTwoScore}}</h4>
               </div>
             </div>
             <div class="clearfix"></div>
           </div>
-          <div class="screen" v-show="screen === 2" :key="screen">
-            <h2>Player 1: Would you like to be X or O?</h2>
-            <div class="columns">
-              <div>
-                <button @click="setPlayerSymbol('X')">X</button>
-              </div>
-              <div>
-                <button @click="setPlayerSymbol('O')">O</button>
-              </div>
-            </div>
-            <div class="clearfix"></div>
+          <table class="game-table">
+            <tbody>
+              <tr v-for="(row, i) in gameData">
+                <td v-for="(cell, j) in row" :class="{'filled': cell !== ''}" @click="cellClick($event, i, j)" @mouseenter="cellHighlight"
+                  @mouseleave="cellHighlight">{{cell}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="info-bar">
+            <h4>{{turn === 'one' ? 'Player One' : playerTwoName}}'s turn</h4>
           </div>
-          <div class="screen condensed" v-show="screen === 3" :key="screen">
-            <div class="game-bar">
-              <div class="columns">
-                <div>
-                  <h4>Player One: {{playerOneScore}}</h4>
-                </div>
-                <div>
-                  <h4>{{playerTwoName}}: {{playerTwoScore}}</h4>
-                </div>
-              </div>
-              <div class="clearfix"></div>
-            </div>
-            <table class="game-table">
-              <tbody>
-                <tr v-for="(row, i) in gameData">
-                  <td v-for="(cell, j) in row" :class="{'filled': cell !== ''}" @click="cellClick($event, i, j)" @mouseenter="cellHighlight"
-                    @mouseleave="cellHighlight">{{cell}}</td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="info-bar">
-              <h4>{{turn === 'one' ? 'Player One' : playerTwoName}}'s turn</h4>
-            </div>
-          </div>
-        </transition-group>
+        </div>
+        <!-- </transition-group> -->
+        <div class="overlay-message" v-if="isGameOver">
+          <template v-if="lastResultIsWin">
+            <p v-html="winnerMessage"></p>
+          </template>
+          <template v-else>
+            <p>Game Drawn! </p>
+          </template>
+          <button @click="startGame">Replay!</button>
+        </div>
       </div>
     </div>
     <h2 class="brand">Designed and Coded by <a href="https://github.com/mubaidr">mubaidr</a></h2>

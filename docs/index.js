@@ -4,8 +4,10 @@ Vue.config.productionTip = false
 var myApp = new Vue({
   el: '#app',
   data: {
-    screen: 3,
-    turn: 'one',
+    screen: 0,
+    lastResultIsWin: false,
+    isGameOver: false,
+    turn: null,
     playerData: {
       one: {
         symbol: 'X'
@@ -34,12 +36,20 @@ var myApp = new Vue({
   },
   created () {},
   mounted () {},
-  watch: {
-    'winner' () {
-
-    }
-  },
+  watch: {},
   computed: {
+    winnerMessage () {
+      let lastWinner = this.winner[this.winner.length - 1]
+      if (lastWinner === 'one') {
+        return 'Congratulations!<br/> Player One has won the game.'
+      } else {
+        if (this.playerData.two.isComputer) {
+          return 'Awww... You lost!'
+        } else {
+          return 'Congratulations! Player Two has won the game.'
+        }
+      }
+    },
     playerOneScore () {
       return this.winner.filter((item) => {
         return item === 'one'
@@ -96,13 +106,15 @@ var myApp = new Vue({
         })
 
         if (emptyPos.length === 0) {
-          this.showScreen(false)
+          this.isGameOver = true
+          this.lastResultIsWin = false
+        } else {
+          this.nextTurn()
         }
       } else {
-        this.showScreen(true)
+        this.isGameOver = true
+        this.lastResultIsWin = true
       }
-
-      this.nextTurn()
     },
     nextTurn () {
       if (this.turn === 'one') {
@@ -137,11 +149,13 @@ var myApp = new Vue({
     },
     startGame () {
       this.turn = ['one', 'two'][Math.floor(Math.random() * 1)]
+      this.isGameOver = false
       this.gameData = [
         ['', '', ''],
         ['', '', ''],
         ['', '', '']
       ]
+      this.screen = 3
     },
     setPlayerSymbol (symbol) {
       this.playerData.one.symbol = symbol
@@ -178,9 +192,6 @@ var myApp = new Vue({
       } else {
         target.className = ''
       }
-    },
-    showScreen (isWin) {
-      console.log(isWin)
     }
   }
 })

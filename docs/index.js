@@ -4,7 +4,7 @@ Vue.config.productionTip = false
 var myApp = new Vue({
   el: '#app',
   data: {
-    screen: 0,
+    screen: 3,
     turn: 'one',
     playerData: {
       one: {
@@ -86,7 +86,7 @@ var myApp = new Vue({
       this.gameData[emptyPosValue.row][emptyPosValue.cell] = this.playerData.two.symbol
     },
     startGame () {
-      this.turn = ['one', 'two'][Math.floor(Math.random() * (1 - 0)) + 0]
+      this.turn = ['one', 'two'][Math.floor(Math.random() * 1)]
       this.gameData = [
         ['', '', ''],
         ['', '', ''],
@@ -114,16 +114,15 @@ var myApp = new Vue({
     cellClick (e, row, cell) {
       let target = e.target
       if (target.innerHTML !== '') return
-      if (this.turn === 'two' && this.playerData.isComputer) return
+      if (this.turn === 'two' && this.playerData[this.turn].isComputer) return
       this.gameData[row][cell] = this.playerData[this.turn].symbol
-
       this.validateStatus()
       this.nextTurn()
     },
     cellHighlight (e) {
       let target = e.target
       if (target.innerHTML !== '') return
-      if (this.turn === 'two' && this.playerData.isComputer) return
+      if (this.turn === 'two' && this.playerData[this.turn].isComputer) return
       if (e.type === 'mouseenter') {
         target.className = this.playerData[this.turn].symbol
       } else {

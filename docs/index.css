@@ -8,18 +8,18 @@
   .brand {
     text-align: center;
     font-size: 1.25em;
-    margin: 5% auto;
+    /* margin: 5% auto; */
     color: #c4c9e8;
   }
 
   h1.brand {
     font-size: 3em;
     color: #fff;
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
   }
 
   h2.brand {
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
   }
 
   .brand a {
@@ -61,15 +61,22 @@
   .info-bar {
     display: block;
     padding: 5px;
-    background-color: #c4c9e8;
+    background-color: #eee;
     min-height: 44px;
+    font-size: 1.25em;
+    color: #3f51b5;
+  }
+
+  .info-bar {
+    color: #fe4081;
+    font-weight: bold;
   }
 
   .game-table {
     width: 100%;
     border: none;
-    border-spacing: 0;
-    border-collapse: collapse;
+    border-spacing: 0px;
+    /* border-collapse: collapse; */
   }
 
   .game-table td {
@@ -79,14 +86,34 @@
     font-size: 4em;
     font-weight: bold;
     cursor: pointer;
-    border: 1px dotted black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     height: 79px;
+  }
+
+  .game-table td.filled {
+    cursor: not-allowed;
+  }
+
+  .game-table td.X:hover:before {
+    content: 'X';
+    position: relative;
+    top: 0;
+    left: 0;
+    color: rgba(0, 0, 0, 0.2);
+  }
+
+  .game-table td.O:hover:before {
+    content: 'O';
+    position: relative;
+    top: 0;
+    left: 0;
+    color: rgba(0, 0, 0, 0.2);
   }
   /*screens layout*/
 
   .main-menu {
     padding: 5px;
-    background-color: #3f51b5;
+    background-color: #fefefe;
     box-shadow: 0 0 3px #222;
     text-align: right;
     position: relative;
